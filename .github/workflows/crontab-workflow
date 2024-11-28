@@ -1,0 +1,9 @@
+name: crontab workflow
+
+on:
+  schedule:
+  - cron "0/5 * * * *"
+jobs:
+  first-cron-job:
+  run-on: ubuntu-latest
+  - run: echo "cron workflow"
