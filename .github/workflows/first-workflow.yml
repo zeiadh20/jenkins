@@ -1,14 +1,14 @@
 name: first workflow
 
 on:
-  workflow_dispatch:
-    inputs:
-      versionName:
-        required: true
-        description: "this is version name for github workflow: "
+  # workflow_dispatch:
+  #   inputs:
+  #     versionName:
+  #       required: true
+  #       description: "this is version name for github workflow: "
   # repository_dispatch:
   #   types: [test] # Triggered by external repository_dispatch event
-  # push:
+  push:
   #   branches:
   #     - "main" # Triggered on push to the main branch
   # pull_request:
