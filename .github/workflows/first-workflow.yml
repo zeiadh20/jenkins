@@ -1,14 +1,14 @@
 name: first workflow
 
 on:
-  # workflow_dispatch:
-  #   inputs:
-  #     versionName:
-  #       required: true
-  #       description: "this is version name for github workflow: "
+  workflow_dispatch:
+    inputs:
+      versionName:
+        required: true
+        description: "this is version name for github workflow: "
   # repository_dispatch:
   #   types: [test] # Triggered by external repository_dispatch event
-  push:
+  # push:
   #   branches:
   #     - "main" # Triggered on push to the main branch
   # pull_request:
@@ -31,5 +31,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: List files after checkout
+        if: github.event.inputs.versionName == 'test'
         run: ls
         shell: bash
