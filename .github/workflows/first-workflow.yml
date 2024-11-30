@@ -1,21 +1,28 @@
 name: first workflow
 
 on:
-  repository_dispatch:
-    types: [test] # Triggered by external repository_dispatch event
-  push:
-    branches:
-      - "main" # Triggered on push to the main branch
-  pull_request:
-    branches:
-      - "feature" # Triggered for pull requests targeting the "feature" branch
-    types: [opened, closed]
+  workflow_dispatch:
+    inputs:
+      versionName:
+        required: true
+        description: "this is version name for github workflow: "
+
+
+  # repository_dispatch:
+  #   types: [test] # Triggered by external repository_dispatch event
+  # push:
+  #   branches:
+  #     - "main" # Triggered on push to the main branch
+  # pull_request:
+  #   branches:
+  #     - "feature" # Triggered for pull requests targeting the "feature" branch
+  #   types: [opened, closed]
 
 jobs:
   first-workflow-job:
     name: first job
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: List files before checkout
         run: ls
