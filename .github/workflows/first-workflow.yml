@@ -6,8 +6,6 @@ on:
       versionName:
         required: true
         description: "this is version name for github workflow: "
-
-
   # repository_dispatch:
   #   types: [test] # Triggered by external repository_dispatch event
   # push:
@@ -25,6 +23,7 @@ jobs:
 
     steps:
       - name: List files before checkout
+        if: github.ref == 'refs/head/main'
         run: ls
         shell: bash
       
