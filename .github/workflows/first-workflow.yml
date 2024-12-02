@@ -1,40 +1,60 @@
-name: first workflow
+# name: first workflow
+# on:
+#   # workflow_dispatch:
+#   #   inputs:
+#   #     versionName:
+#   #       required: true
+#   #       description: "this is version name for github workflow: "
+#   # repository_dispatch:
+#   #   types: [test] # Triggered by external repository_dispatch event
+#   push:
+#   #   branches:
+#   #     - "main" # Triggered on push to the main branch
+#   # pull_request:
+#   #   branches:
+#   #     - "feature" # Triggered for pull requests targeting the "feature" branch
+#   #   types: [opened, closed]
 
-on:
-  # workflow_dispatch:
-  #   inputs:
-  #     versionName:
-  #       required: true
-  #       description: "this is version name for github workflow: "
-  # repository_dispatch:
-  #   types: [test] # Triggered by external repository_dispatch event
-  push:
-  #   branches:
-  #     - "main" # Triggered on push to the main branch
-  # pull_request:
-  #   branches:
-  #     - "feature" # Triggered for pull requests targeting the "feature" branch
-  #   types: [opened, closed]
+# jobs:
+#   first-workflow-job:
+#     name: first job
+#     runs-on: ubuntu-latest
+#     container:
+#       image: node:14.16
+
+#     steps:
+#       - name: check node version
+#         run: node -v
+#       - name: List files before checkout
+      # if: github.ref == 'refs/head/main'
+#         run: ls
+#         shell: bash
+      
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
+
+#       - name: List files after checkout
+#         if: github.event.inputs.versionName == 'test'
+#         run: ls
+#         shell: bash
+
+
+on: 
+  pull_request:
+    branches:
+      - "main"
 
 jobs:
-  first-workflow-job:
-    name: first job
+  ci-workflow:
+    name: ci workflow
     runs-on: ubuntu-latest
-    container:
-      image: node:14.16
-
     steps:
-      - name: check node version
-        run: node -v
-      - name: List files before checkout
-        if: github.ref == 'refs/head/main'
-        run: ls
-        shell: bash
-      
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: List files after checkout
-        if: github.event.inputs.versionName == 'test'
-        run: ls
-        shell: bash
+      - name: Build the app
+        run: "mvn clean package"
+        shell: bash 
+
+      - name: Test the app
+        run: "mvn test"
