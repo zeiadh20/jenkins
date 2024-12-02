@@ -1,10 +1,10 @@
-# name: crontab workflow
+name: crontab workflow
 
-# on:
-#   schedule:
-#   - cron: "0/5 * * * *"
-# jobs:
-#   first-cron-job:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - run: echo "cron workflow"
+on:
+  schedule:
+  - cron: "0/5 * * * *"
+jobs:
+  first-cron-job:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "cron workflow"
